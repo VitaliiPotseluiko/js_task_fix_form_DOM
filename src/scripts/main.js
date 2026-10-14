@@ -1,39 +1,20 @@
 'use strict';
 
-const fields = [
-  {
-    id: 'sign-up-name',
-    label: 'First name',
-    placeholder: 'Enter your first name',
-  },
-  {
-    id: 'sign-up-last-name',
-    label: 'Last name',
-    placeholder: 'Enter your last name',
-  },
-  { id: 'sign-up-email', label: 'Email', placeholder: 'Enter your email' },
-  {
-    id: 'sign-up-password',
-    label: 'Password',
-    placeholder: 'Enter your password',
-  },
-  { id: 'sign-in-email', label: 'Email', placeholder: 'Enter your email' },
-  {
-    id: 'sign-in-password',
-    label: 'Password',
-    placeholder: 'Enter your password',
-  },
-];
+const forms = document.querySelectorAll('form');
 
-fields.forEach(({ id, label, placeholder }) => {
-  const input = document.getElementById(id);
+forms.forEach((form) => {
+  const inputs = form.querySelectorAll('input');
 
-  const inputLabel = document.createElement('label');
+  inputs.forEach((input) => {
+    const label = document.createElement('label');
 
-  inputLabel.textContent = label;
-  inputLabel.htmlFor = id;
+    label.classList.add('field-label');
+    label.textContent = input.name;
+    label.htmlFor = input.id;
 
-  input.placeholder = placeholder;
+    input.placeholder =
+      input.name.charAt(0).toUpperCase() + input.name.slice(1);
 
-  input.before(inputLabel);
+    input.parentElement.appendChild(label);
+  });
 });
